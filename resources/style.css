@@ -11,7 +11,9 @@ html {
   cursor: default;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
@@ -22,7 +24,67 @@ html {
   user-select: none;
 }
 
-input, textarea {
+input,
+textarea {
   -webkit-user-select: auto;
   user-select: auto;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#canvas {
+  border: 1px black solid;
+}
+
+.colors button {
+  width: 20px;
+  height: 20px;
+  outline: 0;
+}
+
+.tools .current-color .color {
+  width: 100%;
+  height: 30px;
+  background-color: #009fff;
+  transition: background-color 0.3s;
+}
+
+.tools .brushes button {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background-color: #ece8e8;
+  margin-bottom: 5px;
+  padding: 5px;
+  height: 30px;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.tools .brushes button:after {
+  height: 1px;
+  display: block;
+  background: #808080;
+  content: '';
+}
+
+.tools .brushes button:nth-child(2):after {
+  height: 2px;
+}
+
+.tools .brushes button:nth-child(3):after {
+  height: 3px;
+}
+
+.tools .brushes button:nth-child(4):after {
+  height: 4px;
+}
+
+.tools .brushes button:nth-child(5):after {
+  height: 5px;
 }

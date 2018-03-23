@@ -2,12 +2,15 @@
   "name": "draw-and-render",
   "version": "0.1.0",
   "engines": {
-    "sketch": ">=3.0"
+    "sketch": ">=49"
   },
   "skpm": {
     "name": "draw-and-render",
     "manifest": "src/manifest.json",
-    "main": "plugin.sketchplugin"
+    "main": "draw-and-render.sketchplugin",
+    "resources": [
+      "resources/**/main.js"
+    ]
   },
   "scripts": {
     "build": "skpm-build",
@@ -16,15 +19,20 @@
     "postinstall": "npm run build && skpm-link"
   },
   "devDependencies": {
-    "@skpm/builder": "^0.1.3",
+    "@skpm/builder": "^0.4.0",
     "@skpm/extract-loader": "^1.0.1",
+    "babel": "^6.23.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.7",
-    "html-loader": "^0.5.1"
+    "eslint": "^4.19.1",
+    "html-loader": "^0.5.1",
+    "style-loader": "^0.20.3"
   },
-  "resources": [
-    "resources/**/*.js"
-  ],
   "dependencies": {
+    "bulma": "^0.6.2",
+    "rxjs": "^5.5.7",
     "sketch-module-web-view": "^0.2.0"
   },
   "author": "nichenqin <nichenqin@gmail.com>"
