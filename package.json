@@ -1,7 +1,7 @@
 {
   "name": "draw-and-render",
   "description": "A plugin to render canvas to sketch",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "engines": {
     "sketch": ">=49"
   },
@@ -12,7 +12,9 @@
     "name": "draw-and-render",
     "manifest": "src/manifest.json",
     "main": "draw-and-render.sketchplugin",
-    "resources": ["resources/**/main.js"]
+    "resources": [
+      "resources/**/main.js"
+    ]
   },
   "scripts": {
     "build": "skpm-build",
