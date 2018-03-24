@@ -1,5 +1,6 @@
 {
   "name": "draw-and-render",
+  "description": "A plugin to render canvas to sketch",
   "version": "0.5.0",
   "engines": {
     "sketch": ">=49"
