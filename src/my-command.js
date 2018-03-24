@@ -18,10 +18,10 @@ export default function(context) {
     shouldKeepAround: true,
     resizable: false,
     handlers: {
-      render(data) {
+      render(base64) {
         const image = new sketch.Image({
           image: {
-            base64: data,
+            base64,
           },
           parent: page,
         })
