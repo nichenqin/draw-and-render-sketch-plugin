@@ -4,13 +4,14 @@
   "engines": {
     "sketch": ">=49"
   },
+  "repository": {
+    "url": "https://github.com/nichenqin/draw-and-render-sketch-plugin"
+  },
   "skpm": {
     "name": "draw-and-render",
     "manifest": "src/manifest.json",
     "main": "draw-and-render.sketchplugin",
-    "resources": [
-      "resources/**/main.js"
-    ]
+    "resources": ["resources/**/main.js"]
   },
   "scripts": {
     "build": "skpm-build",
