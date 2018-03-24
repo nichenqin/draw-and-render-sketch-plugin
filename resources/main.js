@@ -13,8 +13,16 @@ function isKeyShiftDown(keyCode) {
   return keyCode === KEY_CODE.SHIFT
 }
 
-// region color
 const tools = document.querySelector('.tools')
+const canvas = document.querySelector('#canvas')
+const context = canvas.getContext('2d')
+context.lineJoin = 'round'
+
+const boundings = canvas.getBoundingClientRect()
+const canvasOffsetX = boundings.left
+const canvasOffsetY = boundings.top
+
+// region color
 const colors = tools.querySelectorAll('.colors button')
 const customColor = tools.querySelector('.custom-color')
 const currentColor = tools.querySelector('.current-color .color')
@@ -85,13 +93,6 @@ toggleDrawModeStream.subscribe(drawMode => {
 // endregion drawMode
 
 // region canvas
-const canvas = document.querySelector('#canvas')
-const context = canvas.getContext('2d')
-context.lineJoin = 'round'
-
-const boundings = canvas.getBoundingClientRect()
-const canvasOffsetX = boundings.left
-const canvasOffsetY = boundings.top
 
 const mousedownStream = Rx.Observable.fromEvent(canvas, 'mousedown')
 const mousemoveStream = Rx.Observable.fromEvent(document.documentElement, 'mousemove')

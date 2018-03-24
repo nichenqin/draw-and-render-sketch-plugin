@@ -7,12 +7,12 @@ export default function(context) {
     x: 0,
     y: 0,
     width: 1000,
-    height: 400,
+    height: 750,
     blurredBackground: true,
     onlyShowCloseButton: true,
     hideTitleBar: false,
     shouldKeepAround: true,
-    resizable: true,
+    resizable: false,
     handlers: {
       nativeLog(s) {
         context.document.showMessage(s)
