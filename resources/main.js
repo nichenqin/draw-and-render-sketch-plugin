@@ -149,3 +149,11 @@ drawStream.subscribe(({ draw, drawMode }) => {
   }
 })
 // endregion canvas
+
+const renderButton = tools.querySelector('.render')
+const renderStream = Rx.Observable.fromEvent(renderButton, 'click').throttleTime(1000)
+renderStream.subscribe(() => {
+  const data = canvas.toDataURL()
+  const base64 = data.replace('data:image/png;base64,', '')
+  pluginCall('render', base64)
+})

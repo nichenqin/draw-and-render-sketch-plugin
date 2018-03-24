@@ -1,5 +1,9 @@
-import sketch from 'sketch/dom'
+const sketch = require('sketch')
+const UI = require('sketch/ui')
 import WebUI from 'sketch-module-web-view'
+
+const document = sketch.getSelectedDocument()
+const page = document.selectedPage
 
 export default function(context) {
   const webUI = new WebUI(context, require('../resources/index.html'), {
@@ -14,10 +18,13 @@ export default function(context) {
     shouldKeepAround: true,
     resizable: false,
     handlers: {
-      nativeLog(s) {
-        context.document.showMessage(s)
-
-        webUI.eval(`setRandomNumber(${Math.random()})`)
+      render(data) {
+        const image = new sketch.Image({
+          image: {
+            base64: data,
+          },
+          parent: page,
+        })
       },
     },
   })

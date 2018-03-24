@@ -65,11 +65,14 @@ var exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80,7 +83,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (context) {
-  var webUI = new _sketchModuleWebView2.default(context, __webpack_require__(1), {
+  var webUI = new _sketchModuleWebView2.default(context, __webpack_require__(9), {
     identifier: 'draw.and.render', // to reuse the UI
     x: 0,
     y: 0,
@@ -92,20 +95,19 @@ exports.default = function (context) {
     shouldKeepAround: true,
     resizable: false,
     handlers: {
-      nativeLog: function nativeLog(s) {
-        context.document.showMessage(s);
-
-        webUI.eval('setRandomNumber(' + Math.random() + ')');
+      render: function render(data) {
+        var image = new sketch.Image({
+          image: {
+            base64: data
+          },
+          parent: page
+        });
       }
     }
   });
 };
 
-var _dom = __webpack_require__(2);
-
-var _dom2 = _interopRequireDefault(_dom);
-
-var _sketchModuleWebView = __webpack_require__(3);
+var _sketchModuleWebView = __webpack_require__(10);
 
 var _sketchModuleWebView2 = _interopRequireDefault(_sketchModuleWebView);
 
@@ -113,28 +115,33 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
 }
 
+var sketch = __webpack_require__(13);
+var UI = __webpack_require__(15);
+
+var document = sketch.getSelectedDocument();
+var page = document.selectedPage;
+
 /***/ }),
-/* 1 */
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ (function(module, exports) {
 
-module.exports = "file://" + context.plugin.urlForResourceNamed("_webpack_resources/82f1bc91c5b20038267c926853806410.html").path();
+module.exports = "file://" + context.plugin.urlForResourceNamed("_webpack_resources/69f8edca3c7b05562cb416732faf804e.html").path();
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("sketch/dom");
-
-/***/ }),
-/* 3 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 /* globals NSUUID NSThread NSPanel NSMakeRect NSTexturedBackgroundWindowMask NSTitledWindowMask NSWindowTitleHidden NSClosableWindowMask NSColor NSWindowMiniaturizeButton NSWindowZoomButton NSFloatingWindowLevel WebView COScript NSWindowCloseButton NSFullSizeContentViewWindowMask NSVisualEffectView NSAppearance NSAppearanceNameVibrantLight NSVisualEffectBlendingModeBehindWindow NSLayoutConstraint NSLayoutRelationEqual NSLayoutAttributeLeft NSLayoutAttributeTop NSLayoutAttributeRight NSLayoutAttributeBottom NSResizableWindowMask */
-var MochaJSDelegate = __webpack_require__(4);
-var parseQuery = __webpack_require__(5);
+var MochaJSDelegate = __webpack_require__(11);
+var parseQuery = __webpack_require__(12);
 
 var coScript = COScript.currentCOScript();
 
@@ -306,7 +313,7 @@ WebUI.clean = function () {
 module.exports = WebUI;
 
 /***/ }),
-/* 4 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -379,7 +386,7 @@ module.exports = function (selectorHandlerDict, superclass) {
 };
 
 /***/ }),
-/* 5 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -399,6 +406,19 @@ module.exports = function (query) {
   }, {});
   return query;
 };
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+module.exports = require("sketch");
+
+/***/ }),
+/* 14 */,
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("sketch/ui");
 
 /***/ })
 /******/ ]);

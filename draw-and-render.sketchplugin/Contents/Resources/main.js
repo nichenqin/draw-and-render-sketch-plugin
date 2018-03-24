@@ -15437,6 +15437,16 @@ drawStream.subscribe(function (_ref2) {
 });
 // endregion canvas
 
+var renderButton = tools.querySelector('.render');
+var renderStream = _rxjs2.default.Observable.fromEvent(renderButton, 'click').throttleTime(1000);
+renderStream.subscribe(function () {
+  var data = canvas.toDataURL();
+  console.log(data);
+  var base64 = data.replace('data:image/png;base64,', '');
+  console.log(base64);
+  (0, _client2.default)('render', base64);
+});
+
 /***/ }),
 /* 162 */
 /***/ (function(module, exports, __webpack_require__) {
