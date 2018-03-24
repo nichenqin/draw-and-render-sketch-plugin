@@ -14,10 +14,11 @@
       "my-command-identifier"
     ]
   },
-  "version": "0.1.0",
+  "version": "0.5.1",
+  "description": "A plugin to render canvas to sketch",
   "name": "draw-and-render",
   "disableCocoaScriptPreprocessor": true,
-  "appcast": "https://raw.githubusercontent.com//master/.appcast.xml",
+  "appcast": "https://raw.githubusercontent.com/nichenqin/draw-and-render-sketch-plugin/master/.appcast.xml",
   "author": "nichenqin",
   "authorEmail": "nichenqin@gmail.com"
 }
