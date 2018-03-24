@@ -42,9 +42,10 @@ chooseColorStream.subscribe(color => {
 const brushes = tools.querySelectorAll('.brushes button')
 const customBrush = tools.querySelector('.custom-brush [type=range]')
 const currentBrush = tools.querySelector('.current-brush p')
-const brushStream = Rx.Observable.fromEvent(brushes, 'click')
-const customBrushStream = Rx.Observable.fromEvent(customBrush, 'change')
-const brushesStream = Rx.Observable.merge(brushStream, customBrushStream)
+const brushesStream = Rx.Observable.merge(
+  Rx.Observable.fromEvent(brushes, 'click'),
+  Rx.Observable.fromEvent(customBrush, 'change'),
+)
 
 const chooseBrushStream = brushesStream.pluck('target', 'value').startWith(INITIAL_BRUSH)
 chooseBrushStream.subscribe(brush => {
@@ -70,9 +71,10 @@ clearStream.subscribe(() => {
 // region drawMode
 const onDrawModeStream = Rx.Observable.merge(colorsStream, brushesStream).mapTo(true)
 const offDrawModeStream = eraseStream.mapTo(false)
-const toggleDrawModeStream = Rx.Observable.merge(onDrawModeStream, offDrawModeStream).startWith(
-  true,
-)
+const toggleDrawModeStream = Rx.Observable.merge(onDrawModeStream, offDrawModeStream)
+  .startWith(true)
+  .distinctUntilChanged()
+
 toggleDrawModeStream.subscribe(drawMode => {
   if (!drawMode) {
     eraser.classList.remove('is-outlined')
@@ -84,11 +86,12 @@ toggleDrawModeStream.subscribe(drawMode => {
 
 // region canvas
 const canvas = document.querySelector('#canvas')
+const context = canvas.getContext('2d')
+context.lineJoin = 'round'
+
 const boundings = canvas.getBoundingClientRect()
 const canvasOffsetX = boundings.left
 const canvasOffsetY = boundings.top
-const context = canvas.getContext('2d')
-context.lineJoin = 'round'
 
 const mousedownStream = Rx.Observable.fromEvent(canvas, 'mousedown')
 const mousemoveStream = Rx.Observable.fromEvent(document.documentElement, 'mousemove')
