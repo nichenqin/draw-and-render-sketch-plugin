@@ -70,7 +70,7 @@ clearStream.subscribe(() => {
 // endregion clear
 
 // region drawMode
-const onDrawModeStream = Rx.Observable.merge(colorsStream, brushesStream).mapTo(true)
+const onDrawModeStream = Rx.Observable.merge(colorsStream, brushesStream, clearStream).mapTo(true)
 const offDrawModeStream = eraseStream.mapTo(false)
 const toggleDrawModeStream = Rx.Observable.merge(onDrawModeStream, offDrawModeStream)
   .startWith(true)
