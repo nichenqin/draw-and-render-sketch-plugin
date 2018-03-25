@@ -3,15 +3,8 @@ import pluginCall from 'sketch-module-web-view/client'
 import './style.css'
 import 'bulma/css/bulma.css'
 
-const KEY_CODE = {
-  SHIFT: 16,
-}
 const INITIAL_COLOR = '#009fff'
 const INITIAL_BRUSH = 10
-
-function isKeyShiftDown(keyCode) {
-  return keyCode === KEY_CODE.SHIFT
-}
 
 const tools = document.querySelector('.tools')
 const canvas = document.querySelector('#canvas')
