@@ -93,24 +93,13 @@ const mouseupStream = Rx.Observable.fromEvent(document.documentElement, 'mouseup
 const animateStream = Rx.Observable.interval(0, Rx.Scheduler.animationFrame)
 
 const drawStream = mousedownStream
-  .withLatestFrom(chooseColorStream, (down, color) => {
-    context.globalCompositeOperation = 'source-over'
-    context.strokeStyle = color
+  .mergeMap(down => {
     context.beginPath()
     context.moveTo(down.clientX - canvasOffsetX, down.clientY - canvasOffsetY)
-    return down
+    return mousemoveStream.takeUntil(mouseupStream)
   })
-  .withLatestFrom(chooseBrushStream, (down, brush) => {
-    context.lineWidth = brush
-    return down
-  })
-  .mergeMap(() => mousemoveStream.takeUntil(mouseupStream))
   .withLatestFrom(animateStream, draw => draw)
-  .withLatestFrom(toggleDrawModeStream, (draw, drawMode) => ({
-    draw,
-    drawMode,
-  }))
-  .map(({ draw, drawMode }) => {
+  .map(draw => {
     let x = draw.clientX - canvasOffsetX
     let y = draw.clientY - canvasOffsetY
     if (x > canvas.width) {
@@ -123,11 +112,22 @@ const drawStream = mousedownStream
     } else if (y < 0) {
       y = 0
     }
-    return {
-      draw: { x, y },
-      drawMode,
-    }
+    return { x, y }
   })
+  .withLatestFrom(
+    chooseColorStream,
+    chooseBrushStream,
+    toggleDrawModeStream,
+    (draw, color, brush, drawMode) => {
+      context.globalCompositeOperation = 'source-over'
+      context.strokeStyle = color
+      context.lineWidth = brush
+      return {
+        draw,
+        drawMode,
+      }
+    },
+  )
 
 drawStream.subscribe(({ draw, drawMode }) => {
   if (drawMode) {

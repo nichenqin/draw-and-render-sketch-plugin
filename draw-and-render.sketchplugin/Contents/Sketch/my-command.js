@@ -1,1 +1,422 @@
-var that=this;function __skpm_run(key,context){that.context=context;var exports=function(e){var t={};function n(r){if(t[r])return t[r].exports;var i=t[r]={i:r,l:!1,exports:{}};return e[r].call(i.exports,i,i.exports,n),i.l=!0,i.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=0)}([function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e){new o.default(e,n(1),{identifier:"draw.and.render",x:0,y:0,width:1e3,height:750,blurredBackground:!0,onlyShowCloseButton:!0,hideTitleBar:!1,shouldKeepAround:!0,resizable:!1,handlers:{render:function(e){new a.Image({image:{base64:e},parent:s})}}})};var r,i=n(2),o=(r=i)&&r.__esModule?r:{default:r};var a=n(5),s=(n(6),a.getSelectedDocument().selectedPage)},function(e,t){e.exports="file://"+context.plugin.urlForResourceNamed("_webpack_resources/69f8edca3c7b05562cb416732faf804e.html").path()},function(e,t,n){"use strict";var r=n(3),i=n(4),o=COScript.currentCOScript(),a="webView:didChangeLocationWithinPageForFrame:";function s(e,t,n,r){n.addConstraint(NSLayoutConstraint.constraintWithItem_attribute_relatedBy_toItem_attribute_multiplier_constant(t,e,NSLayoutRelationEqual,n,e,1,r))}function l(e,t,n){e.setTranslatesAutoresizingMaskIntoConstraints(!1),s(NSLayoutAttributeLeft,e,t,n[0]),s(NSLayoutAttributeTop,e,t,n[1]),s(NSLayoutAttributeRight,e,t,n[2]),s(NSLayoutAttributeBottom,e,t,n[3])}function u(e,t,n){var s,u,c=(n=n||{}).identifier||NSUUID.UUID().UUIDString(),d=NSThread.mainThread().threadDictionary();if(d[c]){(s=d[c]).makeKeyAndOrderFront(null);for(var p=s.contentView().subviews(),f=0;f<p.length;f++)p[f].isKindOfClass(WebView.class())&&(u=p[f]);if(!u)throw new Error("Tried to reuse panel but couldn't find the webview inside");return{panel:s,eval:u.stringByEvaluatingJavaScriptFromString,webView:u}}s=NSPanel.alloc().init();var g=n.width||240,S=n.height||180;s.setFrame_display(NSMakeRect(n.x||0,n.y||0,g,S),!0),s.setTitle(n.title||e.plugin.name()),n.hideTitleBar&&(s.setTitlebarAppearsTransparent(!0),s.setTitleVisibility(NSWindowTitleHidden)),n.onlyShowCloseButton&&(s.standardWindowButton(NSWindowMiniaturizeButton).setHidden(!0),s.standardWindowButton(NSWindowZoomButton).setHidden(!0));var h=s.standardWindowButton(NSWindowCloseButton);function w(){if(n.onPanelClose&&!1===n.onPanelClose())return;s.close(),d.removeObjectForKey(n.identifier),o.setShouldKeepAround(!1)}h.setCOSJSTargetFunction(w),h.setAction("callAction:"),s.setStyleMask(n.styleMask||(n.resizable?NSTexturedBackgroundWindowMask|NSTitledWindowMask|NSResizableWindowMask|NSClosableWindowMask|NSFullSizeContentViewWindowMask:NSTexturedBackgroundWindowMask|NSTitledWindowMask|NSClosableWindowMask|NSFullSizeContentViewWindowMask)),s.becomeKeyWindow(),s.setLevel(NSFloatingWindowLevel);var m=n.background||NSColor.whiteColor();if(s.setBackgroundColor(m),n.blurredBackground){var b=NSVisualEffectView.alloc().initWithFrame(NSMakeRect(0,0,g,S));b.setAppearance(NSAppearance.appearanceNamed(NSAppearanceNameVibrantLight)),b.setBlendingMode(NSVisualEffectBlendingModeBehindWindow),s.contentView().addSubview(b),l(b,s.contentView(),[0,0,0,0])}if(d[c]=s,!1!==n.shouldKeepAround&&o.setShouldKeepAround(!0),u=WebView.alloc().initWithFrame(NSMakeRect(0,n.hideTitleBar?-24:0,n.width||240,(n.height||180)-(n.hideTitleBar?0:24))),n.frameLoadDelegate||n.handlers){var y,N=n.frameLoadDelegate||{};if(n.handlers)N[a]=function(t,r){var o=t.windowScriptObject().evaluateWebScript("window.location.hash");if((o=i(o)).pluginAction&&o.actionId&&o.actionId!==y&&o.pluginAction in n.handlers){y=o.actionId;try{o.pluginArgs=JSON.parse(o.pluginArgs)}catch(e){}n.handlers[o.pluginAction].apply(e,o.pluginArgs)}};var v=new r(N);u.setFrameLoadDelegate_(v.getClassInstance())}if(n.uiDelegate){var C=new r(n.uiDelegate);u.setUIDelegate_(C.getClassInstance())}return n.blurredBackground?u.setDrawsBackground(!1):(u.setOpaque(!0),u.setBackgroundColor(m)),/^(?!http|localhost|www|file).*\.html?$/.test(t)&&(t=e.plugin.urlForResourceNamed(t).path()),u.setMainFrameURL_(t),s.contentView().addSubview(u),l(u,s.contentView(),[0,n.hideTitleBar?0:24,0,0]),s.center(),s.makeKeyAndOrderFront(null),{panel:s,eval:u.stringByEvaluatingJavaScriptFromString,webView:u,close:w}}u.clean=function(){o.setShouldKeepAround(!1)},e.exports=u},function(module,exports,__webpack_require__){"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};module.exports=function(selectorHandlerDict,superclass){var uniqueClassName="MochaJSDelegate_DynamicClass_"+NSUUID.UUID().UUIDString(),delegateClassDesc=MOClassDescription.allocateDescriptionForClassWithName_superclass_(uniqueClassName,superclass||NSObject);delegateClassDesc.registerClass();var handlers={};if(this.setHandlerForSelector=function(selectorString,func){var handlerHasBeenSet=selectorString in handlers,selector=NSSelectorFromString(selectorString);if(handlers[selectorString]=func,!handlerHasBeenSet){for(var args=[],regex=/:/g;regex.exec(selectorString);)args.push("arg"+args.length);var dynamicFunction=eval("(function ("+args.join(", ")+") { return handlers[selectorString].apply(this, arguments); })");delegateClassDesc.addInstanceMethodWithSelector_function_(selector,dynamicFunction)}},this.removeHandlerForSelector=function(e){delete handlers[e]},this.getHandlerForSelector=function(e){return handlers[e]},this.getAllHandlers=function(){return handlers},this.getClass=function(){return NSClassFromString(uniqueClassName)},this.getClassInstance=function(){return NSClassFromString(uniqueClassName).new()},"object"===(void 0===selectorHandlerDict?"undefined":_typeof(selectorHandlerDict)))for(var selectorString in selectorHandlerDict)this.setHandlerForSelector(selectorString,selectorHandlerDict[selectorString])}},function(e,t,n){"use strict";e.exports=function(e){if(e=e.split("?")[1])return e=e.split("&").reduce(function(e,t){var n=t.split("=");return 2===n.length&&(e[decodeURIComponent(n[0])]=decodeURIComponent(n[1])),e},{})}},function(e,t){e.exports=require("sketch")},function(e,t){e.exports=require("sketch/ui")}]);"default"===key&&"function"==typeof exports?exports(context):exports[key](context)}that.onRun=__skpm_run.bind(this,"default");
+var that = this;
+function __skpm_run (key, context) {
+  that.context = context;
+
+var exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (context) {
+  var webUI = new _sketchModuleWebView2.default(context, __webpack_require__(1), {
+    identifier: 'draw.and.render', // to reuse the UI
+    x: 0,
+    y: 0,
+    width: 1000,
+    height: 750,
+    blurredBackground: true,
+    onlyShowCloseButton: true,
+    hideTitleBar: false,
+    shouldKeepAround: true,
+    resizable: false,
+    handlers: {
+      render: function render(base64) {
+        var image = new sketch.Image({
+          image: {
+            base64: base64
+          },
+          parent: page
+        });
+      }
+    }
+  });
+};
+
+var _sketchModuleWebView = __webpack_require__(2);
+
+var _sketchModuleWebView2 = _interopRequireDefault(_sketchModuleWebView);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
+var sketch = __webpack_require__(5);
+var UI = __webpack_require__(6);
+
+var document = sketch.getSelectedDocument();
+var page = document.selectedPage;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = "file://" + context.plugin.urlForResourceNamed("_webpack_resources/4f1be51968a8d189492fd943273dec73.html").path();
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* globals NSUUID NSThread NSPanel NSMakeRect NSTexturedBackgroundWindowMask NSTitledWindowMask NSWindowTitleHidden NSClosableWindowMask NSColor NSWindowMiniaturizeButton NSWindowZoomButton NSFloatingWindowLevel WebView COScript NSWindowCloseButton NSFullSizeContentViewWindowMask NSVisualEffectView NSAppearance NSAppearanceNameVibrantLight NSVisualEffectBlendingModeBehindWindow NSLayoutConstraint NSLayoutRelationEqual NSLayoutAttributeLeft NSLayoutAttributeTop NSLayoutAttributeRight NSLayoutAttributeBottom NSResizableWindowMask */
+var MochaJSDelegate = __webpack_require__(3);
+var parseQuery = __webpack_require__(4);
+
+var coScript = COScript.currentCOScript();
+
+var LOCATION_CHANGED = 'webView:didChangeLocationWithinPageForFrame:';
+
+function addEdgeConstraint(edge, subview, view, constant) {
+  view.addConstraint(NSLayoutConstraint.constraintWithItem_attribute_relatedBy_toItem_attribute_multiplier_constant(subview, edge, NSLayoutRelationEqual, view, edge, 1, constant));
+}
+function fitSubviewToView(subview, view, constants) {
+  subview.setTranslatesAutoresizingMaskIntoConstraints(false);
+
+  addEdgeConstraint(NSLayoutAttributeLeft, subview, view, constants[0]);
+  addEdgeConstraint(NSLayoutAttributeTop, subview, view, constants[1]);
+  addEdgeConstraint(NSLayoutAttributeRight, subview, view, constants[2]);
+  addEdgeConstraint(NSLayoutAttributeBottom, subview, view, constants[3]);
+}
+
+function WebUI(context, frameLocation, options) {
+  options = options || {};
+  var identifier = options.identifier || NSUUID.UUID().UUIDString();
+  var threadDictionary = NSThread.mainThread().threadDictionary();
+
+  var panel;
+  var webView;
+
+  // if we already have a panel opened, reuse it
+  if (threadDictionary[identifier]) {
+    panel = threadDictionary[identifier];
+    panel.makeKeyAndOrderFront(null);
+
+    var subviews = panel.contentView().subviews();
+    for (var i = 0; i < subviews.length; i++) {
+      if (subviews[i].isKindOfClass(WebView.class())) {
+        webView = subviews[i];
+      }
+    }
+
+    if (!webView) {
+      throw new Error('Tried to reuse panel but couldn\'t find the webview inside');
+    }
+
+    return {
+      panel: panel,
+      eval: webView.stringByEvaluatingJavaScriptFromString,
+      webView: webView
+    };
+  }
+
+  panel = NSPanel.alloc().init();
+
+  // Window size
+  var panelWidth = options.width || 240;
+  var panelHeight = options.height || 180;
+  panel.setFrame_display(NSMakeRect(options.x || 0, options.y || 0, panelWidth, panelHeight), true);
+
+  // Titlebar
+  panel.setTitle(options.title || context.plugin.name());
+  if (options.hideTitleBar) {
+    panel.setTitlebarAppearsTransparent(true);
+    panel.setTitleVisibility(NSWindowTitleHidden);
+  }
+
+  // Hide minize and zoom buttons
+  if (options.onlyShowCloseButton) {
+    panel.standardWindowButton(NSWindowMiniaturizeButton).setHidden(true);
+    panel.standardWindowButton(NSWindowZoomButton).setHidden(true);
+  }
+
+  // Close window callback
+  var closeButton = panel.standardWindowButton(NSWindowCloseButton);
+  function closeHandler() {
+    if (options.onPanelClose) {
+      var result = options.onPanelClose();
+      if (result === false) {
+        return;
+      }
+    }
+    panel.close();
+    threadDictionary.removeObjectForKey(options.identifier);
+    coScript.setShouldKeepAround(false);
+  }
+
+  closeButton.setCOSJSTargetFunction(closeHandler);
+  closeButton.setAction('callAction:');
+
+  panel.setStyleMask(options.styleMask || (options.resizable ? NSTexturedBackgroundWindowMask | NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSFullSizeContentViewWindowMask : NSTexturedBackgroundWindowMask | NSTitledWindowMask | NSClosableWindowMask | NSFullSizeContentViewWindowMask));
+  panel.becomeKeyWindow();
+  panel.setLevel(NSFloatingWindowLevel);
+
+  // Appearance
+  var backgroundColor = options.background || NSColor.whiteColor();
+  panel.setBackgroundColor(backgroundColor);
+  if (options.blurredBackground) {
+    var vibrancy = NSVisualEffectView.alloc().initWithFrame(NSMakeRect(0, 0, panelWidth, panelHeight));
+    vibrancy.setAppearance(NSAppearance.appearanceNamed(NSAppearanceNameVibrantLight));
+    vibrancy.setBlendingMode(NSVisualEffectBlendingModeBehindWindow);
+
+    // Add it to the panel
+    panel.contentView().addSubview(vibrancy);
+    fitSubviewToView(vibrancy, panel.contentView(), [0, 0, 0, 0]);
+  }
+
+  threadDictionary[identifier] = panel;
+
+  if (options.shouldKeepAround !== false) {
+    // Long-running script
+    coScript.setShouldKeepAround(true);
+  }
+
+  // Add Web View to window
+  webView = WebView.alloc().initWithFrame(NSMakeRect(0, options.hideTitleBar ? -24 : 0, options.width || 240, (options.height || 180) - (options.hideTitleBar ? 0 : 24)));
+
+  if (options.frameLoadDelegate || options.handlers) {
+    var handlers = options.frameLoadDelegate || {};
+    if (options.handlers) {
+      var lastQueryId;
+      handlers[LOCATION_CHANGED] = function (webview, frame) {
+        var query = webview.windowScriptObject().evaluateWebScript('window.location.hash');
+        query = parseQuery(query);
+        if (query.pluginAction && query.actionId && query.actionId !== lastQueryId && query.pluginAction in options.handlers) {
+          lastQueryId = query.actionId;
+          try {
+            query.pluginArgs = JSON.parse(query.pluginArgs);
+          } catch (err) {}
+          options.handlers[query.pluginAction].apply(context, query.pluginArgs);
+        }
+      };
+    }
+    var frameLoadDelegate = new MochaJSDelegate(handlers);
+    webView.setFrameLoadDelegate_(frameLoadDelegate.getClassInstance());
+  }
+  if (options.uiDelegate) {
+    var uiDelegate = new MochaJSDelegate(options.uiDelegate);
+    webView.setUIDelegate_(uiDelegate.getClassInstance());
+  }
+
+  if (!options.blurredBackground) {
+    webView.setOpaque(true);
+    webView.setBackgroundColor(backgroundColor);
+  } else {
+    // Prevent it from drawing a white background
+    webView.setDrawsBackground(false);
+  }
+
+  // When frameLocation is a file, prefix it with the Sketch Resources path
+  if (/^(?!http|localhost|www|file).*\.html?$/.test(frameLocation)) {
+    frameLocation = context.plugin.urlForResourceNamed(frameLocation).path();
+  }
+  webView.setMainFrameURL_(frameLocation);
+
+  panel.contentView().addSubview(webView);
+  fitSubviewToView(webView, panel.contentView(), [0, options.hideTitleBar ? 0 : 24, 0, 0]);
+
+  panel.center();
+  panel.makeKeyAndOrderFront(null);
+
+  return {
+    panel: panel,
+    eval: webView.stringByEvaluatingJavaScriptFromString,
+    webView: webView,
+    close: closeHandler
+  };
+}
+
+WebUI.clean = function () {
+  coScript.setShouldKeepAround(false);
+};
+
+module.exports = WebUI;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/* globals NSUUID MOClassDescription NSObject NSSelectorFromString NSClassFromString */
+
+module.exports = function (selectorHandlerDict, superclass) {
+  var uniqueClassName = 'MochaJSDelegate_DynamicClass_' + NSUUID.UUID().UUIDString();
+
+  var delegateClassDesc = MOClassDescription.allocateDescriptionForClassWithName_superclass_(uniqueClassName, superclass || NSObject);
+
+  delegateClassDesc.registerClass();
+
+  // Storage Handlers
+  var handlers = {};
+
+  // Define interface
+  this.setHandlerForSelector = function (selectorString, func) {
+    var handlerHasBeenSet = selectorString in handlers;
+    var selector = NSSelectorFromString(selectorString);
+
+    handlers[selectorString] = func;
+
+    /*
+      For some reason, Mocha acts weird about arguments: https://github.com/logancollins/Mocha/issues/28
+      We have to basically create a dynamic handler with a likewise dynamic number of predefined arguments.
+    */
+    if (!handlerHasBeenSet) {
+      var args = [];
+      var regex = /:/g;
+      while (regex.exec(selectorString)) {
+        args.push('arg' + args.length);
+      }
+
+      var dynamicFunction = eval('(function (' + args.join(', ') + ') { return handlers[selectorString].apply(this, arguments); })');
+
+      delegateClassDesc.addInstanceMethodWithSelector_function_(selector, dynamicFunction);
+    }
+  };
+
+  this.removeHandlerForSelector = function (selectorString) {
+    delete handlers[selectorString];
+  };
+
+  this.getHandlerForSelector = function (selectorString) {
+    return handlers[selectorString];
+  };
+
+  this.getAllHandlers = function () {
+    return handlers;
+  };
+
+  this.getClass = function () {
+    return NSClassFromString(uniqueClassName);
+  };
+
+  this.getClassInstance = function () {
+    return NSClassFromString(uniqueClassName).new();
+  };
+
+  // Convenience
+  if ((typeof selectorHandlerDict === 'undefined' ? 'undefined' : _typeof(selectorHandlerDict)) === 'object') {
+    for (var selectorString in selectorHandlerDict) {
+      this.setHandlerForSelector(selectorString, selectorHandlerDict[selectorString]);
+    }
+  }
+};
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (query) {
+  query = query.split('?')[1];
+  if (!query) {
+    return;
+  }
+  query = query.split('&').reduce(function (prev, s) {
+    var res = s.split('=');
+    if (res.length === 2) {
+      prev[decodeURIComponent(res[0])] = decodeURIComponent(res[1]);
+    }
+    return prev;
+  }, {});
+  return query;
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("sketch");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("sketch/ui");
+
+/***/ })
+/******/ ]);
+  if (key === 'default' && typeof exports === 'function') {
+    exports(context);
+  } else {
+    exports[key](context);
+  }
+}
+that['onRun'] = __skpm_run.bind(this, 'default')
