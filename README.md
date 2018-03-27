@@ -18,8 +18,14 @@
 * Install the dependencies (`npm install`)
 * Double-click on draw-and-render.sketchplugin
 
+## Usage
+
+* shortcut `command shift d`
+* draw
+* change name(optinal)
+* render!
+
 ## TODO
 
 * [ ] choose rendered layer size
-
 * [ ] specify background color

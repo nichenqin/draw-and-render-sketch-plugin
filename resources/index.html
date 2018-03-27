@@ -78,7 +78,16 @@
           <button class="button clear is-info is-outlined">Clear</button>
         </div>
 
-        <button class="button is-link is-fullwidth render">render</button>
+        <div class="field has-addons">
+          <div class="control">
+            <input id="name" class="input" type="text" placeholder="Enter a layer name">
+          </div>
+          <div class="control">
+            <a type="button" class="button is-link render">
+              render
+            </a>
+          </div>
+        </div>
 
       </div>
 
@@ -86,13 +95,11 @@
         <canvas id="canvas" width="720" height="680"></canvas>
       </div>
 
-
-
     </div>
   </div>
 
   <!-- notice the "../" here. It's because webview.js will be compiled in a different folder -->
-  <script src="./main.js"></script>
+  <script src="../main.js"></script>
 </body>
 
 </html>

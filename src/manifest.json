@@ -3,15 +3,15 @@
   "bundleVersion": 1,
   "commands": [
     {
-      "name": "my-command",
+      "name": "draw-and-render",
       "identifier": "my-command-identifier",
-      "script": "./my-command.js"
+      "script": "./my-command.js",
+      "shortcut": "command shift d"
     }
   ],
   "menu": {
     "title": "draw-and-render",
-    "items": [
-      "my-command-identifier"
-    ]
+    "isRoot": true,
+    "items": ["my-command-identifier"]
   }
 }

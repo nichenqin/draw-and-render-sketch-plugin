@@ -45,7 +45,7 @@ const customBrush = tools.querySelector('.custom-brush [type=range]')
 const currentBrush = tools.querySelector('.current-brush p')
 const brushesStream = Rx.Observable.merge(
   Rx.Observable.fromEvent(brushes, 'click'),
-  Rx.Observable.fromEvent(customBrush, 'change'),
+  Rx.Observable.fromEvent(customBrush, 'change')
 )
 
 const chooseBrushStream = brushesStream.pluck('target', 'value').startWith(INITIAL_BRUSH)
@@ -102,16 +102,13 @@ const drawStream = mousedownStream
   .map(draw => {
     let x = draw.clientX - canvasOffsetX
     let y = draw.clientY - canvasOffsetY
-    if (x > canvas.width) {
-      x = canvas.width
-    } else if (x < 0) {
-      x = 0
-    }
-    if (y > canvas.height) {
-      y = canvas.height
-    } else if (y < 0) {
-      y = 0
-    }
+
+    if (x > canvas.width) x = canvas.width
+    else if (x < 0) x = 0
+
+    if (y > canvas.height) y = canvas.height
+    else if (y < 0) y = 0
+
     return { x, y }
   })
   .withLatestFrom(
@@ -126,7 +123,7 @@ const drawStream = mousedownStream
         draw,
         drawMode,
       }
-    },
+    }
   )
 
 drawStream.subscribe(({ draw, drawMode }) => {
@@ -143,10 +140,17 @@ drawStream.subscribe(({ draw, drawMode }) => {
 })
 // endregion canvas
 
+const nameForm = tools.querySelector('#name')
+const nameChangedSteam = Rx.Observable.fromEvent(nameForm, 'change')
+
 const renderButton = tools.querySelector('.render')
-const renderStream = Rx.Observable.fromEvent(renderButton, 'click').throttleTime(1000)
+const renderButtonStream = Rx.Observable.fromEvent(renderButton, 'click')
+
+const renderStream = Rx.Observable.merge(nameChangedSteam, renderButtonStream).throttleTime(1000)
+
 renderStream.subscribe(() => {
   const data = canvas.toDataURL()
+  const name = nameForm.value || 'Bitmap'
   const base64 = data.replace('data:image/png;base64,', '')
-  pluginCall('render', base64)
+  pluginCall('render', { base64, name })
 })

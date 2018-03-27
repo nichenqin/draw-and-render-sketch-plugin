@@ -1,12 +1,12 @@
-const sketch = require('sketch')
-const UI = require('sketch/ui')
+/* eslint-disable no-new */
+import sketch from 'sketch/dom'
 import WebUI from 'sketch-module-web-view'
 
 const document = sketch.getSelectedDocument()
 const page = document.selectedPage
 
-export default function(context) {
-  const webUI = new WebUI(context, require('../resources/index.html'), {
+export default function (context) {
+  new WebUI(context, require('../resources/index.html'), {
     identifier: 'draw.and.render', // to reuse the UI
     x: 0,
     y: 0,
@@ -18,11 +18,12 @@ export default function(context) {
     shouldKeepAround: true,
     resizable: false,
     handlers: {
-      render(base64) {
-        const image = new sketch.Image({
+      render ({ base64, name }) {
+        new sketch.Image({
           image: {
             base64,
           },
+          name,
           parent: page,
         })
       },
